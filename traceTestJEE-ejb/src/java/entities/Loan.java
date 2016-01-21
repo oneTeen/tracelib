@@ -2,87 +2,125 @@ package entities;
 
 import java.util.*;
 import interfaces.OutputServiceContributor;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
-public class Loan  implements OutputServiceContributor {
-	private Resource resource;
-	private Object subscriber;
-	private GregorianCalendar loanDate;
-	private GregorianCalendar returnDate;
-	private String id;
-	
-	public static int idCounter = 0;
-	
-	public String getFormattedString() {
-		String formattedString = (resource==null?"Unknown":resource.getFormattedString()) + " loaned to ";
-		if ( subscriber == null ) {
-			formattedString += "Nobody";
-		}
-		else if ( subscriber instanceof Student ) {
-			formattedString += ((Student)subscriber).getFormattedString();
-		}
-		else if ( subscriber instanceof Pensioner ) {
-			formattedString += ((Pensioner)subscriber).getFormattedString();
-		}
-		else {
-			formattedString += "Unknown subscriber type.";
-		}
-		return  formattedString;
-	}
+@Entity
+public class Loan implements OutputServiceContributor, Serializable {
 
-	public GregorianCalendar getReturnDate() {
-		return returnDate;
-	}
-	
-        public void setId(String id) {
-		this.id = id;
-	}
-	public void setReturnDate(GregorianCalendar returnDate) {
-		if ( this.returnDate != null )
-			throw new IllegalStateException("Return date has already been assigned");
-		if ( subscriber instanceof Student ) {
-			((Student)subscriber).removeLoan(this);
-		}
-		else if ( subscriber instanceof Pensioner ) {
-			((Pensioner)subscriber).removeLoan(this);
-		}
-		resource.removeLoan();
-		this.returnDate = returnDate;
-	}
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date loanDate;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date returnDate;
 
-	public void setLoanDate(GregorianCalendar loanDate) {
-		this.loanDate = loanDate;
-	}
+    @OneToOne
+    private Suscriber suscriber;
+    
+    @OneToMany
+    private Collection<Resource> resources;
+      
+    public Loan() {
+        this.resources = new ArrayList();
+    }
 
-	public void setResource(Resource resource) {
-		this.resource = resource;
-	}
+    @Override
+    public String getFormattedString() {
+        
+        //TO DO FOR ALL ITEMS IN THE LOAN
+        
+        String formattedString = "temp";
+        
+//        String formattedString = (resource == null ? "Unknown" : resource.getFormattedString()) + " loaned to ";
+//        if (suscriber == null) {
+//            formattedString += "Nobody";
+//        } else if (suscriber instanceof Student) {
+//            formattedString += ((Student) suscriber).getFormattedString();
+//        } else if (suscriber instanceof Pensioner) {
+//            formattedString += ((Pensioner) suscriber).getFormattedString();
+//        } else {
+//            formattedString += "Unknown suscriber type.";
+//        }
+        return formattedString;
+    }
 
-	public void setSubscriber(Object subscriber) {
-		this.subscriber = subscriber;
-	}
+    public Date getReturnDate() {
+        return returnDate;
+    }
 
-	public Loan() {
-		this.id = "L"+idCounter++;
-	}
-	
-	public Loan(String id) {
-		this.id = id;
-		idCounter ++;
-	}
-	
-	public String getId() {
-		return id;
-	}
+    public void setReturnDate(Date returnDate) {
+        if (this.returnDate != null) {
+            throw new IllegalStateException("Return date has already been assigned");
+        }
+        suscriber.removeLoan(this);
+        resources.clear();
+        this.returnDate = returnDate;
+    }
 
-	public GregorianCalendar getLoanDate() {
-		return loanDate;
-	}
+    public void setLoanDate(Date loanDate) {
+        this.loanDate = loanDate;
+    }
 
-	public Resource getResource() {
-		return resource;
-	}
+    public void setResource(Resource resource) {
+        this.resources.add(resource);
+    }
 
-	public Object getSubscriber() {
-		return subscriber;
-	}
+    public void setSuscriber(Suscriber suscriber) {
+        this.suscriber = suscriber;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Date getLoanDate() {
+        return loanDate;
+    }
+
+    public Collection getResource() {
+        return resources;
+    }
+
+    public Object getSubscriber() {
+        return suscriber;
+    }
+
+    public Collection<Resource> getResources() {
+        return resources;
+    }
+
+    public void setResources(Collection<Resource> resources) {
+        this.resources = resources;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Loan)) {
+            return false;
+        }
+        Loan other = (Loan) object;
+        if ((this.id == null && other.getId() != null) || (this.id != null && !this.id.equals(other.getId()))) {
+            return false;
+        }
+        return true;
+    }
+
 }

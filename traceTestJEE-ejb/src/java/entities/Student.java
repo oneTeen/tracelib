@@ -1,65 +1,66 @@
 package entities;
 
-import entities.Loan;
+import java.io.Serializable;
+import javax.persistence.Entity;
 
-import java.util.*;
+/**
+ *
+ * @author Kenneth
+ */
+@Entity
+public class Student extends Suscriber implements Serializable {
 
-import interfaces.OutputServiceContributor;
+//    private static final long serialVersionUID = 1L;
+    private String institution;
 
-public class Student implements OutputServiceContributor {
-	public String id;
-	public String name;
-	public Map loans = new Hashtable();
-	public String institution;
-	
-	public Student(String id, String name, String institution) {
-		this.id = id;
-		this.name = name;
-		this.institution = institution;
-	}
-	
-	public Student(String name, String institution) {
-		this.name = name;
-		this.institution = institution;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+    public Student() {
+    }
 
-	public String getId() {
-		return id;
-	}
+    public Student(String institution, String id, String name) {
+        super(id, name, 6);
+        this.institution = institution;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Student(String institution, String name) {
+        super(name, 6);
+        this.institution = institution;
+    }
 
-	public String getName() {
-		return name;
-	}
-	
-	
-	public void addLoan(Loan loan) throws Exception {
-		if ( loans.size()-1 == getMaxBorrowing() ) { 
-			throw new Exception(name+" has reached their borrowing limit.");
-		}
-		loan.setSubscriber(this);
-		loans.put(loan.getId(), loan);
-	}
-	
-	public void removeLoan(Loan loan) {
-		loans.remove(loan.getId());
-	}
-	
-	public Collection getLoans() {
-		return loans.values();
-	}
-	
-	public int getMaxBorrowing() {
-		return 6;
-	}
-	
-	public String getFormattedString() {
-		return "Student: " + name + " - " + institution;
-	}
+    public String getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(String institution) {
+        this.institution = institution;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " - Student{" + "institution=" + institution + '}';
+    }
+
+    @Override
+    public String getFormattedString() {
+        return "Student: " + super.getName() + " - Institution: " + institution;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (super.getId() != null ? super.getId().hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Student)) {
+            return false;
+        }
+        Student other = (Student) object;
+        if ((super.getId() == null && other.getId() != null) || 
+                (super.getId() != null && !super.getId().equals(other.getId()))) {
+            return false;
+        }
+        return true;
+    }
 }

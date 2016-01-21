@@ -1,0 +1,5 @@
+/build/
+/dist/
+/traceTestJEE-ejb/dist/
+/traceTestJEE-war/dist/
+/traceTestJEE-war/build/

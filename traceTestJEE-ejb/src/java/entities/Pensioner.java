@@ -1,61 +1,55 @@
 package entities;
-import entities.Loan;
 
-import java.util.*;
+import java.io.Serializable;
+import javax.persistence.Entity;
 
-import interfaces.OutputServiceContributor;
+/**
+ *
+ * @author Kenneth
+ */
+@Entity
+public class Pensioner extends Suscriber implements Serializable {
 
-public class Pensioner  implements OutputServiceContributor {
-	public String id;
-	public String name;
-	public Map loans = new Hashtable();
-	
-	public Pensioner(String id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-	
-	public Pensioner(String name) {
-		this.name = name;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+//    private static final long serialVersionUID = 1L;
 
-	public String getId() {
-		return id;
-	}
+    public Pensioner() {
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Pensioner(String name) {
+        super(name,3);
+    }
 
-	public String getName() {
-		return name;
-	}
-	
-	
-	public void addLoan(Loan loan) throws Exception {
-		if ( loans.size()-1 == getMaxBorrowing() ) { 
-			throw new Exception(name+" has reached their borrowing limit.");
-		}
-		loan.setSubscriber(this);
-		loans.put(loan.getId(), loan);
-	}
-	
-	public void removeLoan(Loan loan) {
-		loans.remove(loan.getId());
-	}
-	
-	public Collection getLoans() {
-		return loans.values();
-	}
-	
-	public int getMaxBorrowing(){
-		return 3;
-	}
-	
-	public String getFormattedString() {
-		return "Pensioner: " + name;
-	}
+    public Pensioner(String id, String name) {
+        super(id, name, 3);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " - Pensioner{" + '}';
+    }
+    
+    @Override
+    public String getFormattedString() {
+        return "Pensioner: " + super.getName();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (super.getId() != null ? super.getId().hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Pensioner)) {
+            return false;
+        }
+        Pensioner other = (Pensioner) object;
+        if ((super.getId() == null && other.getId() != null)
+                || (super.getId() != null && !super.getId().equals(other.getId()))) {
+            return false;
+        }
+        return true;
+    }
 }
