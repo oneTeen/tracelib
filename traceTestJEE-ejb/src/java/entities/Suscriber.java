@@ -30,11 +30,7 @@ public class Suscriber implements Serializable, OutputServiceContributor {
     public Suscriber(String name, int maxBmaxBorrowing) {
         this();
         this.name = name;
-    }
-
-    public Suscriber(String id, String name, int maxBmaxBorrowing) {
-        this();
-        this.name = name;
+        this.maxBorrowing = maxBmaxBorrowing;
     }
 
     public void addLoan(Loan loan) throws Exception {

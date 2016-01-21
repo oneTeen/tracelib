@@ -1,6 +1,6 @@
 package subcontrollers;
 
-import entities.Suscriber;
+import entities.Resource;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,37 +11,37 @@ import javax.naming.NamingException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sessionBeans.EJBSuscriberLocal;
+import sessionBeans.EJBResourceLocal;
 
-public class SubCSuscriber implements ControllerInterface, Serializable {
+public class SubCResource implements ControllerInterface, Serializable {
 
-    EJBSuscriberLocal eJBSubscriber = lookupEJBSubscriberLocal();
+    EJBResourceLocal eJBResource = lookupEJBResourceLocal();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet) {
 
-        String url = "suscribers.jsp";
+        String url = "resources.jsp";
         String action = request.getParameter("action");
 
         if ("display".equalsIgnoreCase(action)) {
-            List<Suscriber> sl = eJBSubscriber.getAll();
-            request.setAttribute("suscribers", sl);
-            url = "suscribers.jsp";
+            List<Resource> rl = eJBResource.getAll();
+            request.setAttribute("resources", rl);
+            url = "resources.jsp";
         }
 
         return url;
     }
 
-    private EJBSuscriberLocal lookupEJBSubscriberLocal() {
+    private EJBResourceLocal lookupEJBResourceLocal() {
         try {
             Context c = new InitialContext();
-            return (EJBSuscriberLocal) c.lookup("java:global/traceTestJEE/traceTestJEE-ejb/EJBSubscriber!sessionBeans.EJBSuscriberLocal");
+            return (EJBResourceLocal) c.lookup("java:global/traceTestJEE/traceTestJEE-ejb/EJBResource!sessionBeans.EJBResourceLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
-
-
     
+    
+
 }

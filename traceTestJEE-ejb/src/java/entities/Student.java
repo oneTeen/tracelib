@@ -16,12 +16,7 @@ public class Student extends Suscriber implements Serializable {
     public Student() {
     }
 
-    public Student(String institution, String id, String name) {
-        super(id, name, 6);
-        this.institution = institution;
-    }
-
-    public Student(String institution, String name) {
+    public Student(String name, String institution) {
         super(name, 6);
         this.institution = institution;
     }

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sessionBeans.EJBResourceLocal;
 import sessionBeans.EJBSuscriberLocal;
 
 import subcontrollers.ControllerInterface;
@@ -16,7 +17,12 @@ import subcontrollers.ControllerInterface;
 public class Controller extends HttpServlet {
 
     @EJB
+    private EJBResourceLocal eJBResource;
+
+    @EJB
     private EJBSuscriberLocal eJBSubscriber;
+    
+    
     
     private HashMap<String, ControllerInterface> subcont;
     
@@ -36,6 +42,7 @@ public class Controller extends HttpServlet {
         }
               
         eJBSubscriber.generateTestData();
+        eJBResource.generateTestData();
         
 
     }

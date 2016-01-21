@@ -7,6 +7,10 @@
             <param-name>subcsuscriber.kp</param-name>
             <param-value>subcontrollers.SubCSuscriber</param-value>
         </init-param>
+        <init-param>
+            <param-name>subcresource.kp</param-name>
+            <param-value>subcontrollers.SubCResource</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
@@ -17,4 +21,10 @@
             30
         </session-timeout>
     </session-config>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBResource</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>sessionBeans.EJBResourceLocal</local>
+        <ejb-link>traceTestJEE-ejb.jar#EJBResource</ejb-link>
+    </ejb-local-ref>
 </web-app>

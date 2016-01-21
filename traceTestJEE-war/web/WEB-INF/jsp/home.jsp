@@ -5,16 +5,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <title>Trace Test</title>
     </head>
     <body>
-        <div id="navi">
-            <c:url value="WEB-INF/jsp/navigation.jsp" var="urlnav"/>
-            <c:import url="${urlnav}"/>
-        </div>
         <div id="suscriberDisplay">
-            <c:url value="Controller?section=subcsuscriber.kp&action=display" var="urldisplay"/>
-            <c:import url="${urldisplay}"/>
+            <c:url value="Controller?section=subcsuscriber.kp&action=display" var="urlsusdisplay"/>
+            <c:import url="${urlsusdisplay}"/>
+        </div>
+        <div id="resourceDisplay">
+            <c:url value="Controller?section=subcresource.kp&action=display" var="urlresdisplay"/>
+            <c:import url="${urlresdisplay}"/>
         </div>
     </body>
 </html>

@@ -19,10 +19,6 @@ public class Pensioner extends Suscriber implements Serializable {
         super(name,3);
     }
 
-    public Pensioner(String id, String name) {
-        super(id, name, 3);
-    }
-
     @Override
     public String toString() {
         return super.toString() + " - Pensioner{" + '}';
