@@ -20,5 +20,9 @@
             <c:url value="Controller?section=subcresource.kp&action=display" var="urlresdisplay"/>
             <c:import url="${urlresdisplay}"/>
         </div>
+        <div id="loanDisplay">
+            <c:url value="Controller?section=subcloan.kp&action=display" var="urllndisplay"/>
+            <c:import url="${urllndisplay}"/>
+        </div>
     </body>
 </html>

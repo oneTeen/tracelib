@@ -1,19 +1,17 @@
 package entities;
 
 import java.util.*;
-import interfaces.OutputServiceContributor;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 @Entity
-public class Loan implements OutputServiceContributor, Serializable {
+public class Loan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,28 +30,19 @@ public class Loan implements OutputServiceContributor, Serializable {
       
     public Loan() {
         this.resources = new ArrayList();
+        this.loanDate = new Date();
     }
 
-    @Override
-    public String getFormattedString() {
-        
-        //TO DO FOR ALL ITEMS IN THE LOAN
-        
-        String formattedString = "temp";
-        
-//        String formattedString = (resource == null ? "Unknown" : resource.getFormattedString()) + " loaned to ";
-//        if (suscriber == null) {
-//            formattedString += "Nobody";
-//        } else if (suscriber instanceof Student) {
-//            formattedString += ((Student) suscriber).getFormattedString();
-//        } else if (suscriber instanceof Pensioner) {
-//            formattedString += ((Pensioner) suscriber).getFormattedString();
-//        } else {
-//            formattedString += "Unknown suscriber type.";
-//        }
-        return formattedString;
+    public Loan(Suscriber s, Resource r) {
+        this();
+        this.suscriber = s;
+        this.resources.add(r);
     }
 
+    public Suscriber getSuscriber() {
+        return suscriber;
+    }
+    
     public Date getReturnDate() {
         return returnDate;
     }

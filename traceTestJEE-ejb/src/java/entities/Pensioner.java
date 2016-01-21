@@ -25,11 +25,6 @@ public class Pensioner extends Suscriber implements Serializable {
     }
     
     @Override
-    public String getFormattedString() {
-        return "Pensioner: " + super.getName();
-    }
-
-    @Override
     public int hashCode() {
         int hash = 0;
         hash += (super.getId() != null ? super.getId().hashCode() : 0);

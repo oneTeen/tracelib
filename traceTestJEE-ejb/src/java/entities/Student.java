@@ -35,11 +35,6 @@ public class Student extends Suscriber implements Serializable {
     }
 
     @Override
-    public String getFormattedString() {
-        return "Student: " + super.getName() + " - Institution: " + institution;
-    }
-
-    @Override
     public int hashCode() {
         int hash = 0;
         hash += (super.getId() != null ? super.getId().hashCode() : 0);

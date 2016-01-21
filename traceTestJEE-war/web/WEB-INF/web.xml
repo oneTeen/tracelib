@@ -11,6 +11,10 @@
             <param-name>subcresource.kp</param-name>
             <param-value>subcontrollers.SubCResource</param-value>
         </init-param>
+        <init-param>
+            <param-name>subcloan.kp</param-name>
+            <param-value>subcontrollers.SubCLoan</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
@@ -26,5 +30,11 @@
         <ejb-ref-type>Session</ejb-ref-type>
         <local>sessionBeans.EJBResourceLocal</local>
         <ejb-link>traceTestJEE-ejb.jar#EJBResource</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>EJBLoan</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>sessionBeans.EJBLoanLocal</local>
+        <ejb-link>traceTestJEE-ejb.jar#EJBLoan</ejb-link>
     </ejb-local-ref>
 </web-app>

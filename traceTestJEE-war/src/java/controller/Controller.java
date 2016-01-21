@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sessionBeans.EJBLoanLocal;
 import sessionBeans.EJBResourceLocal;
 import sessionBeans.EJBSuscriberLocal;
 
@@ -17,10 +18,15 @@ import subcontrollers.ControllerInterface;
 public class Controller extends HttpServlet {
 
     @EJB
+    private EJBLoanLocal eJBLoan;
+
+    @EJB
     private EJBResourceLocal eJBResource;
 
     @EJB
     private EJBSuscriberLocal eJBSubscriber;
+    
+    
     
     
     
@@ -41,8 +47,10 @@ public class Controller extends HttpServlet {
             }
         }
               
-        eJBSubscriber.generateTestData();
         eJBResource.generateTestData();
+        eJBSubscriber.generateTestData();
+        eJBLoan.genertateTestData();
+
         
 
     }

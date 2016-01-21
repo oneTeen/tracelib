@@ -2,7 +2,6 @@
 package sessionBeans;
 
 import entities.Pensioner;
-import entities.Resource;
 import entities.Student;
 import entities.Suscriber;
 import java.util.*;
@@ -16,9 +15,6 @@ public class EJBSubscriber implements EJBSuscriberLocal{
 
     @PersistenceContext(unitName = "traceTestJEE-ejbPU")
     private EntityManager em;
-    
-    private static Map<Long, Suscriber> subscribers = new HashMap();
-    public static EJBSubscriber INSTANCE = new EJBSubscriber();
 
     public EJBSubscriber() {}
 

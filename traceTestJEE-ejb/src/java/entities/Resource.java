@@ -1,6 +1,5 @@
 package entities;
 
-import interfaces.OutputServiceContributor;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Resource implements Serializable, OutputServiceContributor {
+public class Resource implements Serializable{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,13 +70,6 @@ public class Resource implements Serializable, OutputServiceContributor {
         return title;
     }
 
-    public void setLoan(Loan loan) throws Exception {
-        if (this.loan != null) {
-            throw new Exception("This resource is already on loan: " + this.loan.getFormattedString());
-        }
-        this.loan = loan;
-    }
-
     public void removeLoan() {
         loan = null;
     }
@@ -107,15 +99,6 @@ public class Resource implements Serializable, OutputServiceContributor {
             return .5;
         } else {
             return 0;
-        }
-    }
-
-    @Override
-    public String getFormattedString() {
-        if (type.equals("Book")) {
-            return "Book - " + title + " by " + author;
-        } else {
-            return "Game - " + title + " for the " + gameType;
         }
     }
 

@@ -1,6 +1,5 @@
 package entities;
 
-import interfaces.OutputServiceContributor;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Suscriber implements Serializable, OutputServiceContributor {
+public class Suscriber implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -77,11 +76,6 @@ public class Suscriber implements Serializable, OutputServiceContributor {
     public String toString() {
         return "Suscriber{" + "id=" + id + ", name=" + name 
                 + ", loans=" + loans + ", maxBorrowing=" + maxBorrowing + '}';
-    }
-
-    @Override
-    public String getFormattedString() {
-        return "Suscriber: " + name;
     }
     
     @Override
