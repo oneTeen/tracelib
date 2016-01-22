@@ -23,9 +23,14 @@ public class EJBLoan implements EJBLoanLocal {
         
         List<Loan> ll = new ArrayList();
         
-        ll.add(new Loan(em.find(Suscriber.class, 1l),em.find(Resource.class, 1l)));
+        ll.add(new Loan(em.find(Suscriber.class, 1l),em.find(Resource.class, 2l)));
+        ll.add(new Loan(em.find(Suscriber.class, 2l),em.find(Resource.class, 4l)));
+        ll.add(new Loan(em.find(Suscriber.class, 3l),em.find(Resource.class, 6l)));
         
-        em.persist(ll.get(0));
+        
+        ll.stream().forEach((l) -> {
+            em.persist(l);
+        });
         
     }
     

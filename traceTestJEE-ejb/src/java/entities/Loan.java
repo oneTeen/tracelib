@@ -42,7 +42,7 @@ public class Loan implements Serializable {
     public Suscriber getSuscriber() {
         return suscriber;
     }
-    
+
     public Date getReturnDate() {
         return returnDate;
     }
