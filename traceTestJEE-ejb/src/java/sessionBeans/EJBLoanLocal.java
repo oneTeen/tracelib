@@ -9,4 +9,5 @@ import javax.ejb.Local;
 public interface EJBLoanLocal {
         public void genertateTestData();
         public List<Loan> getAll();
+        
 }

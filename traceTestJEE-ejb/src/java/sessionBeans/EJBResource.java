@@ -25,8 +25,12 @@ public class EJBResource implements EJBResourceLocal {
         rl.add(new Resource("Book", "2001 Space Odessey", "Arthur C Clarke"));
         rl.add(new Resource("Book", "How to win at bingo", "Two fat ladies"));
         rl.add(new Resource("Book", "The Cold. Don't let it kill you.", "J.R.Hartley"));
+        rl.add(new Resource("Book", "The Eight", "Katherine Neville"));
         rl.add(new Resource("Game", "Halo", "X-Box"));
         rl.add(new Resource("Game", "Midtown madness", "PS2"));
+        rl.add(new Resource("Game", "Rainbow Siege", "PC"));
+        rl.add(new Resource("Game", "The Witcher 3: Wild Hunt", "PC"));
+        rl.add(new Resource("Game", "Anno 2205", "PC"));
 
         rl.stream().forEach((r) -> {
             em.persist(r);

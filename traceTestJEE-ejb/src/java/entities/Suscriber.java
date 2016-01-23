@@ -18,6 +18,7 @@ public class Suscriber implements Serializable {
     private Long id;
     private String name;
     private int maxBorrowing;
+    private String susType;
 
     @OneToMany(mappedBy = "suscriber")
     private Collection<Loan> loans;
@@ -30,8 +31,19 @@ public class Suscriber implements Serializable {
         this();
         this.name = name;
         this.maxBorrowing = maxBmaxBorrowing;
+        this.susType = this.getClass().getSimpleName();
     }
 
+    public String getSusType() {
+        return susType;
+    }
+
+    public void setSusType(String susType) {
+        this.susType = susType;
+    }
+
+    
+    
     public void addLoan(Loan loan) throws Exception {
         if (loans.size() - 1 == getMaxBorrowing()) {
             throw new Exception(name + " has reached their borrowing limit.");

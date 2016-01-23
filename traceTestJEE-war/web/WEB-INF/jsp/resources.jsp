@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1>Resource list</h1>
+<h2>Resource list</h2>
 
 <table class="table">
     <thead

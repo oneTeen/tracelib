@@ -8,6 +8,7 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>TYPE</th>
             <th>NAME</th>
             <th>INSTITUTION</th>
         </tr>
@@ -17,6 +18,7 @@
         <c:forEach items="${suscribers}" var="s">
             <tr>
                 <td>${s.id}</td>
+                <td>${s.susType}</td>
                 <td>${s.name}</td>
                 <td><c:catch var="exception">${s.institution}</c:catch>
                     <c:if test="${not empty exception}"></c:if></td>

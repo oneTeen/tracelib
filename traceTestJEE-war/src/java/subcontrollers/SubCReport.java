@@ -1,4 +1,3 @@
-
 package subcontrollers;
 
 import entities.Loan;
@@ -12,35 +11,34 @@ import javax.naming.NamingException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sessionBeans.EJBLoanLocal;
+import sessionBeans.EJBReportServiceLocal;
 
-public class SubCLoan  implements ControllerInterface, Serializable {
+public class SubCReport implements ControllerInterface, Serializable {
 
-    EJBLoanLocal eJBLoan = lookupEJBLoanLocal();
-    
+    EJBReportServiceLocal eJBReportService = lookupEJBReportServiceLocal();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response, HttpServlet servlet) {
-
-        String url = "loans.jsp";
+        String url = "report.jsp";
         String action = request.getParameter("action");
 
         if ("display".equalsIgnoreCase(action)) {
-            List<Loan> ll = eJBLoan.getAll();
-            request.setAttribute("loans", ll);
-            url = "loans.jsp";
+            List<Loan> rl = eJBReportService.getOutstanding();
+            request.setAttribute("report", rl);
+            url = "report.jsp";
         }
 
         return url;
     }
 
-    private EJBLoanLocal lookupEJBLoanLocal() {
+    private EJBReportServiceLocal lookupEJBReportServiceLocal() {
         try {
             Context c = new InitialContext();
-            return (EJBLoanLocal) c.lookup("java:global/traceTestJEE/traceTestJEE-ejb/EJBLoan!sessionBeans.EJBLoanLocal");
+            return (EJBReportServiceLocal) c.lookup("java:global/traceTestJEE/traceTestJEE-ejb/EJBReportService!sessionBeans.EJBReportServiceLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
-    
+
 }

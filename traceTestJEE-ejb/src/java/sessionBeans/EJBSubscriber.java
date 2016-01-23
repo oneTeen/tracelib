@@ -25,8 +25,12 @@ public class EJBSubscriber implements EJBSuscriberLocal{
         
         sl.add(new Pensioner("Bill"));
         sl.add(new Pensioner("Elsie"));
+        sl.add(new Pensioner("Mile"));
+        sl.add(new Pensioner("Pam"));
         sl.add(new Student("Zach", "De Montfort University"));
         sl.add(new Student("Amelia", "Christchurch College"));
+        sl.add(new Student("Maria", "Drexel University"));
+        sl.add(new Student("Nick", "Delaware University"));
         
         sl.stream().forEach((s) -> {
             em.persist(s);

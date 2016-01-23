@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import org.joda.time.DateTime;
 
 @Entity
 public class Loan implements Serializable {
@@ -25,18 +26,27 @@ public class Loan implements Serializable {
     @OneToOne
     private Suscriber suscriber;
     
-    @OneToMany
+    @OneToMany(mappedBy = "loan")
     private Collection<Resource> resources;
       
     public Loan() {
         this.resources = new ArrayList();
-        this.loanDate = new Date();
     }
 
     public Loan(Suscriber s, Resource r) {
         this();
         this.suscriber = s;
         this.resources.add(r);
+        this.loanDate = new Date();
+        this.returnDate = (new DateTime(this.loanDate).plusDays(this.suscriber.getMaxBorrowing())).toDate();
+    }
+
+    public Loan(Suscriber s, Resource r, Date loanDate) {
+        this();
+        this.suscriber = s;
+        this.resources.add(r);
+        this.loanDate = loanDate;
+        this.returnDate = (new DateTime(this.loanDate).plusDays(this.suscriber.getMaxBorrowing())).toDate();
     }
 
     public Suscriber getSuscriber() {

@@ -1,0 +1,14 @@
+
+Hello!
+
+You'll need:
+
+Microsoft SQL Server
+DB name: tracelib
+usr: sa
+ps: sa
+
+GlassFish
+
+pool: tracelibPool
+resource: jdbc/tracelib
